@@ -7,42 +7,66 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <style>
-        :root {
-            --primary: #ff6b6b;
-            --secondary: #667eea;
-            --dark: #120f2d;
-            --light: rgba(255,255,255,0.1);
-        }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * { margin:0; padding:0; box-sizing:border-box; }
         body {
             font-family: 'Poppins', sans-serif;
-            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
-            background-size: 400% 400%;
-            animation: gradient 15s ease infinite;
             height: 100vh;
             overflow: hidden;
-            color: white;
+            color: #333;
             position: relative;
+            transition: all 1.8s ease;
         }
-        @keyframes gradient {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
+
+        /* DAY MODE – ULTRA SOFT, EYE-SOOTHING PASTEL GRADIENT */
+        body.day {
+            background: linear-gradient(135deg,
+                #e0f7fa 0%,
+                #f8f5ff 20%,
+                #fff0f5 40%,
+                #f0fff0 60%,
+                #f5f5ff 80%,
+                #e6f9ff 100%
+            );
+            background-size: 300% 300%;
+            animation: softFlow 20s ease infinite;
+        }
+        @keyframes softFlow {
+            0%   { background-position: 0% 50%; }
+            50%  { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
         }
 
-        /* Floating Hearts */
+        /* NIGHT MODE – DEEP SPACE */
+        body.night {
+            background: #0a0e1a;
+        }
+
+        /* Twinkling stars */
+        .star {
+            position: absolute;
+            background: #fff;
+            border-radius: 50%;
+            box-shadow: 0 0 10px #fff;
+            animation: twinkle 4s infinite;
+        }
+        @keyframes twinkle {
+            0%,100% { opacity: 0.4; }
+            50%     { opacity: 1; }
+        }
+
+        /* Gentle hearts (day only) */
         .heart {
             position: absolute;
-            font-size: 2rem;
-            color: rgba(255,107,107,0.6);
-            animation: float 8s infinite linear;
+            font-size: 1.8rem;
+            color: rgba(255, 105, 180, 0.6);
+            animation: float 15s infinite linear;
             pointer-events: none;
         }
         @keyframes float {
-            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
-            10% { opacity: 1; }
-            90% { opacity: 1; }
-            100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
+            0%   { transform: translateY(100vh); opacity: 0; }
+            15%  { opacity: 0.8; }
+            85%  { opacity: 0.8; }
+            100% { transform: translateY(-100px); opacity: 0; }
         }
 
         .container {
@@ -50,7 +74,7 @@
             z-index: 10;
             text-align: center;
             padding: 40px;
-            max-width: 700px;
+            max-width: 720px;
             margin: 0 auto;
             height: 100vh;
             display: flex;
@@ -58,140 +82,181 @@
             justify-content: center;
             align-items: center;
         }
+
         h1 {
-            font-size: 5rem;
+            font-size: 5.8rem;
             font-weight: 700;
-            background: linear-gradient(45deg, #ff9a9e, #fad0c4);
+            background: linear-gradient(45deg, #667eea, #764ba2, #f093fb);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            margin-bottom: 20px;
-            animation: glow 3s ease-in-out infinite alternate;
+            margin-bottom: 15px;
         }
-        @keyframes glow {
-            from { text-shadow: 0 0 20px rgba(255,107,107,0.5); }
-            to { text-shadow: 0 0 40px rgba(255,107,107,0.9); }
-        }
+
         p.tagline {
-            font-size: 1.8rem;
-            margin: 20px 0;
+            font-size: 1.9rem;
             font-weight: 300;
+            color: #555;
+            margin: 20px 0;
         }
+
         .stats {
             display: flex;
             gap: 40px;
             margin: 40px 0;
-            font-size: 1.4rem;
         }
         .stat {
-            background: rgba(255,255,255,0.15);
-            padding: 15px 30px;
-            border-radius: 50px;
+            background: rgba(255,255,255,0.7);
+            padding: 18px 38px;
+            border-radius: 60px;
             backdrop-filter: blur(10px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            color: #333;
+            font-weight: 600;
         }
+
         .btn-group {
-            margin: 40px 0;
             display: flex;
-            gap: 20px;
+            gap: 25px;
             flex-wrap: wrap;
             justify-content: center;
         }
         .btn {
-            padding: 16px 40px;
-            font-size: 1.3rem;
+            padding: 18px 55px;
+            font-size: 1.5rem;
             border: none;
-            border-radius: 50px;
+            border-radius: 70px;
             cursor: pointer;
             font-weight: 600;
+            min-width: 220px;
             transition: all 0.4s;
-            min-width: 180px;
         }
         .btn-primary {
-            background: white;
-            color: var(--primary);
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
         }
-        .btn-primary:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-        }
+        .btn-primary:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(102,126,234,0.4); }
         .btn-secondary {
             background: transparent;
-            color: white;
-            border: 2px solid white;
+            color: #667eea;
+            border: 2px solid #667eea;
         }
         .btn-secondary:hover {
-            background: white;
-            color: #667eea;
+            background: #667eea;
+            color: white;
         }
+
         .footer {
             position: absolute;
             bottom: 30px;
-            font-size: 1rem;
-            opacity: 0.8;
+            font-size: 1.1rem;
+            color: #777;
         }
-        .dark-mode-toggle {
+
+        /* PURE ICON TOGGLE – ONLY SUN & MOON */
+        .mode-toggle {
             position: absolute;
-            top: 30px;
-            right: 30px;
-            background: rgba(255,255,255,0.2);
-            border: none;
-            color: white;
-            width: 60px;
-            height: 60px;
+            top: 35px;
+            right: 35px;
+            background: rgba(255,255,255,0.8);
+            border: 3px solid #ddd;
+            color: #667eea;
+            width: 70px;
+            height: 70px;
             border-radius: 50%;
-            font-size: 1.5rem;
+            font-size: 2.4rem;
             cursor: pointer;
+            transition: all 0.6s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            z-index: 100;
+        }
+        .mode-toggle:hover {
+            transform: rotate(360deg) scale(1.2);
+            background: white;
+        }
+        body.night .mode-toggle {
+            background: rgba(20,20,40,0.8);
+            border-color: #444;
+            color: #fff;
         }
     </style>
 </head>
-<body>
-    <button class="dark-mode-toggle" onclick="document.body.classList.toggle('dark')">
-        <i class="fas fa-moon"></i>
+<body class="day">
+
+    <!-- ONLY ICONS: Moon (day) → Sun (night) -->
+    <button class="mode-toggle" id="modeBtn" onclick="toggleMode()">
+        Moon
     </button>
 
     <div class="container">
         <h1>Hey Champ!</h1>
         <p class="tagline">Connect Your Two Database?</p>
-        
+
         <div class="stats">
-            <div class="stat">
-                <strong id="users">12,457</strong><br>Happy Users
-            </div>
-            <div class="stat">
-                <strong id="online">1,234</strong><br>Online Now
-            </div>
+            <div class="stat"><strong id="users">12,457</strong><br>Happy Users</div>
+            <div class="stat"><strong id="online">1,234</strong><br>Online Now</div>
         </div>
 
         <div class="btn-group">
-            <button class="btn btn-primary" onclick="location.href='/admin/'">
-                <i class="fas fa-sign-in-alt"></i> Login
-            </button>
-            <button class="btn btn-secondary">
-                <i class="fas fa-user-plus"></i> Join Free
-            </button>
+            <button class="btn btn-primary" onclick="location.href='/admin/'">Login</button>
+            <button class="btn btn-secondary">Join Free</button>
         </div>
 
         <div class="footer">
-            © 2025  • Made with <i class="fas fa-heart" style="color:#ff6b6b"></i> by Innocent Devil
+            © 2025 • Made with Heart by Innocent Devil
         </div>
     </div>
 
-    <!-- Floating Hearts Animation -->
     <script>
-        function createHeart() {
-            const heart = document.createElement('div');
-            heart.classList.add('heart');
-            heart.innerHTML = 'Heart';
-            heart.style.left = Math.random() * 100 + 'vw';
-            heart.style.animationDuration = Math.random() * 5 + 8 + 's';
-            document.body.appendChild(heart);
-            setTimeout(() => heart.remove(), 13000);
-        }
-        setInterval(createHeart, 400);
+        function toggleMode() {
+            const body = document.body;
+            const btn = document.getElementById('modeBtn');
 
-        // Fake live counter
+            if (body.classList.contains('day')) {
+                body.classList.replace('day', 'night');
+                btn.innerHTML = 'Sun';
+                createStars();
+                document.querySelectorAll('.heart').forEach(h => h.remove());
+            } else {
+                body.classList.replace('night', 'day');
+                btn.innerHTML = 'Moon';
+                document.querySelectorAll('.star').forEach(s => s.remove());
+            }
+        }
+
+        // 160 soft stars
+        function createStars() {
+            for (let i = 0; i < 160; i++) {
+                const s = document.createElement('div');
+                s.className = 'star';
+                const size = Math.random() * 2.5 + 0.5;
+                s.style.width = s.style.height = size + 'px';
+                s.style.top = Math.random() * 100 + '%';
+                s.style.left = Math.random() * 100 + '%';
+                s.style.animationDelay = Math.random() * 4 + 's';
+                document.body.appendChild(s);
+            }
+        }
+
+        // Gentle hearts
+        function createHeart() {
+            if (!document.body.classList.contains('day')) return;
+            const h = document.createElement('div');
+            h.className = 'heart';
+            h.innerHTML = 'Heart';
+            h.style.left = Math.random() * 100 + 'vw';
+            h.style.animationDuration = Math.random() * 8 + 12 + 's';
+            document.body.appendChild(h);
+            setTimeout(() => h.remove(), 20000);
+        }
+        setInterval(createHeart, 600);
+
+        // Live counter
         setInterval(() => {
             document.getElementById('online').textContent = 
-                (1200 + Math.floor(Math.random() * 300)).toLocaleString();
+                (1200 + Math.floor(Math.random() * 400)).toLocaleString();
         }, 4000);
     </script>
 </body>
