@@ -3,65 +3,196 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Connections - Find Your Match</title>
+    <title>Connect – Your Two Database</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+        :root {
+            --primary: #ff6b6b;
+            --secondary: #667eea;
+            --dark: #120f2d;
+            --light: rgba(255,255,255,0.1);
+        }
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: 'Poppins', sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+            height: 100vh;
+            overflow: hidden;
+            color: white;
+            position: relative;
+        }
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Floating Hearts */
+        .heart {
+            position: absolute;
+            font-size: 2rem;
+            color: rgba(255,107,107,0.6);
+            animation: float 8s infinite linear;
+            pointer-events: none;
+        }
+        @keyframes float {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
+        }
+
+        .container {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            padding: 40px;
+            max-width: 700px;
+            margin: 0 auto;
             height: 100vh;
             display: flex;
-            align-items: center;
+            flex-direction: column;
             justify-content: center;
-            color: white;
-            text-align: center;
-        }
-        .container {
-            max-width: 600px;
-            padding: 40px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+            align-items: center;
         }
         h1 {
-            font-size: 3.5rem;
-            margin-bottom: 20px;
-            background: linear-gradient(to right, #ff6b6b, #feca57);
+            font-size: 5rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, #ff9a9e, #fad0c4);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+            animation: glow 3s ease-in-out infinite alternate;
         }
-        p { font-size: 1.3rem; margin: 20px 0; opacity: 0.9; }
+        @keyframes glow {
+            from { text-shadow: 0 0 20px rgba(255,107,107,0.5); }
+            to { text-shadow: 0 0 40px rgba(255,107,107,0.9); }
+        }
+        p.tagline {
+            font-size: 1.8rem;
+            margin: 20px 0;
+            font-weight: 300;
+        }
+        .stats {
+            display: flex;
+            gap: 40px;
+            margin: 40px 0;
+            font-size: 1.4rem;
+        }
+        .stat {
+            background: rgba(255,255,255,0.15);
+            padding: 15px 30px;
+            border-radius: 50px;
+            backdrop-filter: blur(10px);
+        }
+        .btn-group {
+            margin: 40px 0;
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
         .btn {
-            margin-top: 30px;
-            padding: 15px 40px;
-            font-size: 1.2rem;
-            background: #ff6b6b;
-            color: white;
+            padding: 16px 40px;
+            font-size: 1.3rem;
             border: none;
             border-radius: 50px;
             cursor: pointer;
-            transition: all 0.3s;
-            box-shadow: 0 10px 20px rgba(255,107,107,0.4);
+            font-weight: 600;
+            transition: all 0.4s;
+            min-width: 180px;
         }
-        .btn:hover {
-            transform: translateY(-5px);
-            background: #ff5252;
-            box-shadow: 0 15px 30px rgba(255,82,82,0.5);
+        .btn-primary {
+            background: white;
+            color: var(--primary);
         }
-        .footer { margin-top: 50px; font-size: 0.9rem; opacity: 0.7; }
+        .btn-primary:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+        .btn-secondary:hover {
+            background: white;
+            color: #667eea;
+        }
+        .footer {
+            position: absolute;
+            bottom: 30px;
+            font-size: 1rem;
+            opacity: 0.8;
+        }
+        .dark-mode-toggle {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            background: rgba(255,255,255,0.2);
+            border: none;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
+    <button class="dark-mode-toggle" onclick="document.body.classList.toggle('dark')">
+        <i class="fas fa-moon"></i>
+    </button>
+
     <div class="container">
-        <h1>Need connections</h1>
-        <p>Where meaningful connections begin</p>
-        <p> Build two database relationships?</p>
-        <button class="btn" onclick="alert('Let's Explore')">Get Started Now</button>
+        <h1>Hey Champ!</h1>
+        <p class="tagline">Connect Your Two Database?</p>
+        
+        <div class="stats">
+            <div class="stat">
+                <strong id="users">12,457</strong><br>Happy Users
+            </div>
+            <div class="stat">
+                <strong id="online">1,234</strong><br>Online Now
+            </div>
+        </div>
+
+        <div class="btn-group">
+            <button class="btn btn-primary" onclick="location.href='/admin/'">
+                <i class="fas fa-sign-in-alt"></i> Login
+            </button>
+            <button class="btn btn-secondary">
+                <i class="fas fa-user-plus"></i> Join Free
+            </button>
+        </div>
+
         <div class="footer">
-            <p>© 2025  Innocent Devil</p>
+            © 2025  • Made with <i class="fas fa-heart" style="color:#ff6b6b"></i> by Innocent Devil
         </div>
     </div>
+
+    <!-- Floating Hearts Animation -->
+    <script>
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.innerHTML = 'Heart';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = Math.random() * 5 + 8 + 's';
+            document.body.appendChild(heart);
+            setTimeout(() => heart.remove(), 13000);
+        }
+        setInterval(createHeart, 400);
+
+        // Fake live counter
+        setInterval(() => {
+            document.getElementById('online').textContent = 
+                (1200 + Math.floor(Math.random() * 300)).toLocaleString();
+        }, 4000);
+    </script>
 </body>
 </html>
