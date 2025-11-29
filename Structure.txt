@@ -1,0 +1,18 @@
+dual_db_project/
+├── manage.py
+├── dual_db_project/          (Main Project Folder)
+│   ├── __init__.py
+│   ├── settings.py          ← Configure here
+│   ├── urls.py              ← Configure here
+│   ├── wsgi.py
+│   └── asgi.py
+└── myapp/                    (App Folder)
+    ├── __init__.py
+    ├── models.py            ← Configure here
+    ├── views.py             ← Configure here
+    ├── serializers.py       ← Configure here
+    ├── routers.py           ← Configure here (CREATE THIS FILE)
+    ├── admin.py             ← Configure here
+    ├── apps.py
+    ├── tests.py
+    └── migrations/
